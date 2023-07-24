@@ -56,7 +56,7 @@ while True:
         timer = now.hour*60
         timer = timer + now.minute
         timer = 1440 - timer
-        for i in range(1,timer):
+        for i in range(1,3):
             time.sleep(1)
             print(f'passou {i} seg')
         Solicitar.func01()

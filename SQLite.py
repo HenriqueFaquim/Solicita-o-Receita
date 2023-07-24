@@ -1,6 +1,9 @@
-import sqlite3
+import pymysql
 
-banco = sqlite3.connect('banco_de_dados.db')
+banco = pymysql.connect(host='34.95.162.193',
+                             user='henrique',
+                             password='12345',
+                             database='systemass')
 
 cursor = banco.cursor()
 
@@ -24,7 +27,7 @@ def tabela():
     global dados_tab
     global cursor
     cursor.execute("SELECT * FROM Empresas")
-    a = cursor.fetchall()
+    a = list(cursor.fetchall())
     for i in range(0,len(a)):
         a[i]=list(a[i])
     dados_tab = a
@@ -33,24 +36,25 @@ def tabela():
 def add(empresa,cnpj):
     global cursor
     global banco
-    cursor.execute(f'INSERT INTO Empresas VALUES("{empresa}", "{cnpj}")')
-    banco.commit() 
+    cursor.execute(f'INSERT INTO `Empresas` (`nome`, `cnpj`) VALUES("{empresa}", "{cnpj}")')
+    banco.commit()
 
 
 def remove(empresa):
     global cursor
     global banco
-    cursor.executescript(f'DELETE FROM Empresas WHERE Nome = "{empresa}"')
+    cursor.execute(f'DELETE FROM Empresas WHERE Nome = "{empresa}"')
     banco.commit() 
 
 def attlog(login,senha):
     global cursor
     global banco
-    cursor.executescript(f'UPDATE Log SET cpf = "{login}", senha ="{senha}"  WHERE id = 01;')
+    cursor.execute(f'UPDATE `Log` SET cpf = "{login}", senha ="{senha}"  WHERE id = 01;')
     banco.commit() 
 
 def attdata(datai,dataf):
     global cursor
     global banco
-    cursor.executescript(f'UPDATE Log SET cpf = "{datai}", senha ="{dataf}"  WHERE id = 02;')
+    cursor.execute(f'UPDATE `Log` SET cpf = "{datai}", senha ="{dataf}"  WHERE id = 02;')
     banco.commit() 
+

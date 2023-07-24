@@ -1,6 +1,4 @@
 from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.service import Service
 import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -17,8 +15,7 @@ def func01():
     entradadi = Variaveis_Soli.entradadi
     entradadf = Variaveis_Soli.entradadf
     entradacnpj = Variaveis_Soli.entradacnpj
-    s=Service(ChromeDriverManager().install())    
-    navegador = webdriver.Chrome(service=s) 
+    navegador = webdriver.Chrome() 
     navegador.maximize_window()
     navegador.get('https://receita.pr.gov.br/login')
     navegador.implicitly_wait(30)
