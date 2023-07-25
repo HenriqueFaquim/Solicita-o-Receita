@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 import SQLite
 
 def create(tab, headings):
-
+    tab.sort()
     contact_information_window_layout = [
     [sg.Text("Empresas Cadastradas",expand_x=True, justification='center',  font='Courier 27 italic bold underline',text_color='#4c5e91')],
     
@@ -50,8 +50,10 @@ def create(tab, headings):
                 cnpj = str(values['cnpj'])
                 SQLite.add(nome,cnpj)
                 tab = SQLite.dados_tab
+                tab.sort()
                 contact_information_window['nome'].Update('')
                 contact_information_window['cnpj'].Update('')
+                contact_information_window['_filestable_'].update(tab)
                 sg.popup('EMPRESA SALVA !',text_color='black',font='Courier 12 italic bold')
 
         if event == "Deletar":
