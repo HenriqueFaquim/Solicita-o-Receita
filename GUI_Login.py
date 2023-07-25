@@ -23,7 +23,7 @@ def create():
             senha = str(values['senha'])
             contact_information_window['login'].Update('')
             contact_information_window['senha'].Update('')
-            sg.popup("LOGIN ATUALIZADO COM SUCESSO !!",text_color='black') 
+            sg.popup("LOGIN ATUALIZADO COM SUCESSO !!",text_color='black',font='Courier 12 italic bold') 
             SQLite.attlog(login,senha)
 
 
