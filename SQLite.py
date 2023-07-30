@@ -19,15 +19,16 @@ dados_tab =[]
 #cursor.execute('INSERT INTO Cadastro VALUES("69696411987", "8001DI")')
 
 
-
 def tabela():
     global dados_tab
     global cursor
     cursor.execute("SELECT * FROM Empresas")
     a = cursor.fetchall()
+    a.sort()
     for i in range(0,len(a)):
         a[i]=list(a[i])
     dados_tab = a
+    dados_tab.sort()
 
 
 def add(empresa,cnpj):
@@ -54,3 +55,4 @@ def attdata(datai,dataf):
     global banco
     cursor.executescript(f'UPDATE Log SET cpf = "{datai}", senha ="{dataf}"  WHERE id = 02;')
     banco.commit() 
+

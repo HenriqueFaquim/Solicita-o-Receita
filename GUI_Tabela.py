@@ -43,17 +43,21 @@ def create(tab, headings):
 
         if event == "Adicionar":
             temp = values['cnpj']
-            if temp[-1] not in ('0123456789'):
+            if temp.isnumeric() == False:
                 sg.popup("Digite apenas numeros no CNPJ",text_color='black',font='Courier 12 italic bold')
+            elif len(temp) != 14:
+                sg.popup("CNPJ inválido",text_color='black',font='Courier 12 italic bold')
             else:
-                nome = str(values['nome'])
-                cnpj = str(values['cnpj'])
+
+                nome = str(values['nome'])                
+                cnpj = str(values['cnpj'][0]) + str(values['cnpj'][1]) + '.' + str(values['cnpj'][2])+ str(values['cnpj'][3])+ str(values['cnpj'][4])+ '.' + str(values['cnpj'][5]) + str(values['cnpj'][6]) + str(values['cnpj'][7]) + '/' + str(values['cnpj'][8])+ str(values['cnpj'][9])+ str(values['cnpj'][10])+ str(values['cnpj'][11]) + '-' + str(values['cnpj'][12]) + str(values['cnpj'][13])
                 SQLite.add(nome,cnpj)
+                SQLite.tabela()
                 tab = SQLite.dados_tab
-                tab.sort()
+                contact_information_window['_filestable_'].update(tab)
                 contact_information_window['nome'].Update('')
                 contact_information_window['cnpj'].Update('')
-                contact_information_window['_filestable_'].update(tab)
+                
                 sg.popup('EMPRESA SALVA !',text_color='black',font='Courier 12 italic bold')
 
         if event == "Deletar":
@@ -65,6 +69,9 @@ def create(tab, headings):
             else:
                 SQLite.remove(delemp)
                 contact_information_window['apagar'].Update('')
+                SQLite.tabela()
+                tab = SQLite.dados_tab
+                contact_information_window['_filestable_'].update(tab)
                 sg.popup("EMPRESA REMOVIDA !",text_color='black',font='Courier 12 italic bold')
 
 

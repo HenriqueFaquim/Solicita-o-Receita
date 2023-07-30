@@ -12,6 +12,7 @@ senha = ''
 entradadi = ""
 entradadf = ''
 entradacnpj = []
+entradanome = []
 
 def login():
     global usuario
@@ -39,4 +40,15 @@ def empresas():
     for i in range(0,len(a)):
         ab = a[i]
         entradacnpj.append(ab[0])
+
+def nome_empresas():
+    global entradanome
+    entradanome = []
+    cursor.execute(f'SELECT nome FROM {tabela1}')
+    a = cursor.fetchall()
+
+    for i in range(0,len(a)):
+        ab = a[i]
+        entradanome.append(ab[0])
+
 
