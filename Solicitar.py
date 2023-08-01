@@ -37,9 +37,9 @@ def func_Baixar(pastinha):
     senha = Variaveis_Soli.senha
     entradacnpj = Variaveis_Soli.entradacnpj
     entradanome = Variaveis_Soli.entradanome
-    #s=Service(ChromeDriverManager().install())    
-    #navegador = webdriver.Chrome(service=s) 
-    navegador = webdriver.Chrome(chrome_options=options)
+    s=Service(ChromeDriverManager().install())    
+    navegador = webdriver.Chrome(service=s) 
+    #navegador = webdriver.Chrome(chrome_options=options)
     navegador.maximize_window()
     navegador.get('https://receita.pr.gov.br/login')
     navegador.implicitly_wait(30)
@@ -126,9 +126,9 @@ def func01():
     entradadi = Variaveis_Soli.entradadi
     entradadf = Variaveis_Soli.entradadf
     entradacnpj = Variaveis_Soli.entradacnpj
-    #s=Service(ChromeDriverManager().install())    
-    #navegador = webdriver.Chrome(service=s) 
-    navegador = webdriver.Chrome() 
+    s=Service(ChromeDriverManager().install())    
+    navegador = webdriver.Chrome(service=s) 
+    #navegador = webdriver.Chrome() 
     navegador.maximize_window()
     navegador.get('https://receita.pr.gov.br/login')
     navegador.implicitly_wait(30)
