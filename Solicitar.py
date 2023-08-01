@@ -37,9 +37,8 @@ def func_Baixar(pastinha):
     senha = Variaveis_Soli.senha
     entradacnpj = Variaveis_Soli.entradacnpj
     entradanome = Variaveis_Soli.entradanome
-    s=Service(ChromeDriverManager().install())    
-    navegador = webdriver.Chrome(service=s) 
-    #navegador = webdriver.Chrome(chrome_options=options)
+    s=Service(executable_path='chromedriver.exe')   
+    navegador = webdriver.Chrome(service=s, options=options) 
     navegador.maximize_window()
     navegador.get('https://receita.pr.gov.br/login')
     navegador.implicitly_wait(30)
@@ -59,26 +58,30 @@ def func_Baixar(pastinha):
     #### looping
     for item in entradacnpj:
         nome = str(entradanome[num_emp])
-        time.sleep(1)
+        time.sleep(0.5)
         navegador.find_element(By.XPATH, '//*[@id="ext-gen1081"]').clear()
-        time.sleep(1)
         navegador.find_element(By.XPATH, '//*[@id="ext-gen1081"]').send_keys(item)
         time.sleep(1)
         navegador.find_element(By.XPATH, '//*[@id="ext-gen1081"]').send_keys(Keys.ENTER)
-        time.sleep(0.2)
+        time.sleep(0.5)
+        navegador.find_element(By.XPATH, '//*[@id="ext-gen1081"]').send_keys(Keys.ENTER)
+        time.sleep(1)
         navegador.find_element(By.XPATH, '//*[@id="ext-gen1081"]').send_keys(Keys.ENTER)
         time.sleep(0.2)
         navegador.find_element(By.XPATH, '//*[@id="ext-gen1081"]').send_keys(Keys.ENTER)
-        time.sleep(0.2)
-        navegador.find_element(By.XPATH, '//*[@id="ext-gen1081"]').send_keys(Keys.ENTER)
-        time.sleep(2)
+        time.sleep(5)
 
+        try:
+            time.sleep(1)
+            navegador.find_element(By.XPATH, '//*[@id="button-1009-btnInnerEl"]').click()
+        except:
+            time.sleep(0.1)
         try:
             arquivos = list(navegador.find_element(By.CLASS_NAME, 'x-grid-row').find_elements(By.XPATH, '//img[@data-qtip=\"<b>Download disponível</b>. Por favor clique na imagem para fazer o download.\"]'))
             arquivos[1].click()
             time.sleep(2)
         except:
-            time.sleep(1)
+            time.sleep(0.1)
 
         for file_name in os.listdir(dir):
             old_name = dir + file_name
@@ -99,7 +102,7 @@ def func_Baixar(pastinha):
             arquivos[0].click()
             time.sleep(2)
         except:
-            time.sleep(1)
+            time.sleep(0.1)
 
         for file_name in os.listdir(dir):
                 old_name = dir + file_name
@@ -126,9 +129,8 @@ def func01():
     entradadi = Variaveis_Soli.entradadi
     entradadf = Variaveis_Soli.entradadf
     entradacnpj = Variaveis_Soli.entradacnpj
-    s=Service(ChromeDriverManager().install())    
-    navegador = webdriver.Chrome(service=s) 
-    #navegador = webdriver.Chrome() 
+    s=Service(executable_path='chromedriver.exe')   
+    navegador = webdriver.Chrome(service=s)
     navegador.maximize_window()
     navegador.get('https://receita.pr.gov.br/login')
     navegador.implicitly_wait(30)
